@@ -59,7 +59,7 @@ const Login = () => {
 							<NavLink className="text-white px-12  py-4 bg-primary hover:bg-[#d60303] rounded-sm">
 								Log in
 							</NavLink>
-							<NavLink className="text-primary hover:border-b-1">
+							<NavLink to="/forgot-password" className="text-primary hover:border-b-1">
 								Forget Password?
 							</NavLink>
 						</div>

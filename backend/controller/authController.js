@@ -4,15 +4,15 @@ const jwt = require("jsonwebtoken");
 const { sendEmail, sendForgotEmail } = require("../utils/sendEmail");
 
 const registrationController = async (req, res) => {
-	const { name, email, mobile_number, password } = req.body;
+	const { name, email, password, acceptTerms } = req.body;
 
 	if (!name || !email || !password) {
 		return res.status(400).json({
 			success: false,
-			message: "All fields are required fdffdfdsafee",
+			message: "All fields are required",
 		});
 	}
-	// if (!mobile_number || !email) {
+	// if (!mobileNumber || !email) {
 	// 	return res.status(400).json({
 	// 		success: false,
 	// 		message: "All fields are required",
@@ -38,10 +38,9 @@ const registrationController = async (req, res) => {
 	const hashPassword = bcrypt.hashSync(password, 10);
 
 	const newUser = await UserModel.create({
-		firstName,
+		name,
 		email,
-		password: hashPassword,
-		acceptTerms,
+		password: hashPassword
 	});
 
 	const token = jwt.sign(
@@ -51,15 +50,13 @@ const registrationController = async (req, res) => {
 	);
 
 	// send verification email
-	sendEmail(email, "dada", token);
+	sendEmail(email, "JAHANGIR", token);
 
 	res.json({
 		success: true,
 		message: "User registration successfull",
 		data: {
 			email: newUser.email,
-			acceptTerms: newUser.acceptTerms,
-			role: newUser.role,
 		},
 	});
 };
@@ -147,11 +144,11 @@ const forgotPasswordController = async (req, res) => {
 	try {
 		const token = jwt.sign(
 			{ id: isUserExist._id, email: isUserExist.email, role: isUserExist.role },
-			process.env.AccessToken,
+			process.env.ACCESS_TOKEN,
 			{ expiresIn: "10m" },
 		);
 
-		sendForgotEmail(email, "Al-amin", token);
+		sendForgotEmail(email, "JAHANGIR", token);
 
 		res.json({
 			success: true,
@@ -252,6 +249,7 @@ const revarificationController = async (req, res) => {
 		});
 	}
 };
+
 
 module.exports = {
 	registrationController,

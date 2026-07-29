@@ -50,29 +50,12 @@ const userSchema = new Schema(
 			trim: true,
 			unique: true,
 		},
-		mobile_number: {
-			type: String,
-			trim: true,
-			unique: true,
-		},
 		password: {
 			type: String,
 			required: true,
 			trim: true,
 		},
-		firstName: {
-			type: String,
-			trim: true,
-		},
-		lastName: {
-			type: String,
-			trim: true,
-		},
 		avatar: {
-			type: String,
-			trim: true,
-		},
-		phoneNumber: {
 			type: String,
 			trim: true,
 		},

@@ -14,6 +14,8 @@ import Contact from "./pages/Contact";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 import ProductDetails from "./pages/ProductDetails";
+import ForgotPassword from "./pages/ForgotPassword";
+import NewPassword from "./pages/NewPassword";
 import { Provider } from "react-redux";
 import { store } from "./Store";
 import AtToCart from "./pages/AtToCart";
@@ -36,6 +38,8 @@ const router = createBrowserRouter([
       { path: "contact", Component: Contact },
       { path: "signup", Component: SignUp },
       { path: "login", Component: Login },
+      { path: "forgot-password", Component: ForgotPassword },
+      { path: "new-password", Component: NewPassword },
       { path: "productdetails/:id", Component: ProductDetails },
       { path: "attocart", Component: AtToCart },
       { path: "account", Component: Account },
@@ -49,7 +53,7 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <ToastContainer/>
+    <ToastContainer />
     <Provider store={store}>
       <RouterProvider router={router} />
     </Provider>
