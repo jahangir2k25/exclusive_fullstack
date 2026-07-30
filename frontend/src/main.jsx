@@ -16,6 +16,7 @@ import Login from "./pages/Login";
 import ProductDetails from "./pages/ProductDetails";
 import ForgotPassword from "./pages/ForgotPassword";
 import NewPassword from "./pages/NewPassword";
+import EmailVerify from "./pages/EmailVerify";
 import { Provider } from "react-redux";
 import { store } from "./Store";
 import AtToCart from "./pages/AtToCart";
@@ -40,6 +41,7 @@ const router = createBrowserRouter([
       { path: "login", Component: Login },
       { path: "forgot-password", Component: ForgotPassword },
       { path: "new-password", Component: NewPassword },
+      { path: "/:token", Component: EmailVerify },
       { path: "productdetails/:id", Component: ProductDetails },
       { path: "attocart", Component: AtToCart },
       { path: "account", Component: Account },

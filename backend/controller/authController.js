@@ -127,6 +127,12 @@ const loginController = async (req, res) => {
 		success: true,
 		message: "Successfully Login",
 		accesstoken: token,
+		data: {
+			id: isUserExist._id,
+			// name: isUserExist.name,
+			email: isUserExist.email,
+			role: isUserExist.role,
+		},
 	});
 };
 const forgotPasswordController = async (req, res) => {
