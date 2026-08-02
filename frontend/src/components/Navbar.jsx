@@ -10,10 +10,13 @@ import { CiSearch } from "react-icons/ci";
 import { AiOutlineBars } from "react-icons/ai";
 import { NavLink, useNavigate } from "react-router";
 import { useSelector } from 'react-redux';
+import { BiUser } from "react-icons/bi";
 
 
 const Navbar = () => {
+  const user = useSelector((state) => state.auth?.user);
   const [show, setShow] = useState(false);
+  const [showUserDropdown, setShowUserDropdown] = useState(false);
   const handleClick = () => {
     setShow(!show)
   }
@@ -72,9 +75,11 @@ const Navbar = () => {
                   <NavLink to="/about" className={navActive}>
                     <ListLi className="customize">about</ListLi>
                   </NavLink>
-                  <NavLink to="/signup" className={navActive}>
-                    <ListLi className="customize">sign up</ListLi>
-                  </NavLink>
+                  {!user &&
+                    <NavLink to="/signup" className={navActive}>
+                      <ListLi className="customize">sign up</ListLi>
+                    </NavLink>
+                  }
                 </ListUl>
               </div>
 
@@ -119,13 +124,27 @@ const Navbar = () => {
                       <h2 className="absolute w-5 h-5 -top-3 left-3 rounded-full bg-primary text-white flex justify-center items-center text-xs">{CartIcon.length}</h2>
                     </div>
                   </NavLink>
+
+                  <div className='p-1 relative'>
+                    <button className="text-2xl cursor-pointer" onClick={() => setShowUserDropdown(!showUserDropdown)}>
+                      <BiUser />
+                    </button>
+                    {showUserDropdown && user && (
+                      <ul className='absolute top-9 right-0 p-2 bg-gray-100 text-black w-32 rounded-sm shadow-lg space-y-2 py-2'>
+                        <li>Profile</li>
+                        <li>Dashboard</li>
+                        <li>Settings</li>
+                        <li className="text-red-600 cursor-pointer">Logout</li>
+                      </ul>
+                    )}
+                  </div>
                 </div>
-                
+
               </div>
             </div>
 
           </Flex>
-          
+
           <AiOutlineBars onClick={handleClick} className="lg:hidden block text-3xl pl-2.5 text-center right-2.5 top-2.5 absolute cursor-pointer" />
         </Container>
       </nav >

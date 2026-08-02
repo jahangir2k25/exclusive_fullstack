@@ -126,9 +126,9 @@ const loginController = async (req, res) => {
 	res.json({
 		success: true,
 		message: "Successfully Login",
-		accesstoken: token,
-		data: {
+		userInfo: {
 			id: isUserExist._id,
+			accesstoken: token,
 			// name: isUserExist.name,
 			email: isUserExist.email,
 			role: isUserExist.role,

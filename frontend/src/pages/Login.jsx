@@ -18,17 +18,15 @@ const Login = () => {
 
 	console.log("Store user", user)
 
-
-
 	const [formData, setFormData] = useState({
 		email: "",
 		password: "",
 	})
+
 	const [errorMessage, setErrorMessage] = useState("")
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
-
 		setFormData((prev) => ({ ...prev, [name]: value }))
 	}
 
@@ -37,22 +35,22 @@ const Login = () => {
 			const response = await axios.post(`${import.meta.env.VITE_AUTH_URL}/login`, {
 				email: formData.email, password: formData.password
 			})
-			dispatch(login(response.data.userInfo))
-			if (!response.data.success) {
-				setErrorMessage(response.data.message)
-				console.log("1223334", errorMessage)
-				notify(errorMessage)
-			} else {
-				navigate("/")
-				notify(response.data.message)
-			}
+			console.log(response)
+			const { success, message, userInfo } = response.data;
+			login(userInfo)
 
+			if (success) {
+				dispatch(login(userInfo))
+				notify(message)
+				navigate("/")
+			} else {
+				notify(message)
+			}
 		} catch (error) {
 			console.log(error)
+			console.log(error.message)
 		}
 	}
-
-
 	return (
 		<>
 			<Container>

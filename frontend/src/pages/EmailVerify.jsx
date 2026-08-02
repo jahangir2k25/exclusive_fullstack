@@ -1,7 +1,7 @@
+import axios from "axios";
 import { useNavigate, useParams } from "react-router";
 import BreadCrumb from "../components/BreadCrumb";
 import Container from "../components/Container";
-import axios from "axios";
 
 const EmailVerify = () => {
   const { token } = useParams();
@@ -9,7 +9,9 @@ const EmailVerify = () => {
 
   const registration = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_AUTH_URL}/verify/${token}`);
+      const response = await axios.post(
+        `${import.meta.env.VITE_AUTH_URL}/verify/${token}`
+      );
 
       navigate("/login");
 
