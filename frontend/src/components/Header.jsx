@@ -1,10 +1,10 @@
 import Container from './Container';
 import Flex from './Flex';
 import { IoIosArrowDown } from "react-icons/io";
-import ListUi from './ListUl'
-import ListLi from './ListLi'
+import ListUi from './ListUl';
+import ListLi from './ListLi';
 import { useState } from 'react';
-import { NavLink } from 'react-router'
+import { NavLink } from 'react-router';
 
 const Header = () => {
 

@@ -6,7 +6,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router";
-import RootLayout from "./RootLayout";
+import RootLayout from "./layout/RootLayout";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Shop from "./pages/Shop";
@@ -26,9 +26,16 @@ import Error from "./pages/Error";
 import Wishlist from "./pages/Wishlist";
 import { ToastContainer } from "react-toastify";
 import firebaseConfig from "../src/FirebaseConfig.js";
+// Initialize Firebase
+import DashboardLayout from "./layout/DashboardLayout.jsx";
+import Dashboard from "./dashboard/Dashboard.jsx";
+import CategoryForm from "./components/dashboard/CategoryForm.jsx";
+import ProductForm from "./components/dashboard/ProductForm.jsx";
+
 
 
 const router = createBrowserRouter([
+  // Root routes
   {
     path: "/",
     Component: RootLayout,
@@ -50,9 +57,26 @@ const router = createBrowserRouter([
       { path: "wishlist", Component: Wishlist },
     ],
   },
+  // Dashboard routes
+  {
+    path: "/dashboard",
+    Component: DashboardLayout,
+
+    children: [
+      {
+        path: "",
+        Component: Dashboard,
+
+        children: [
+          { path: "category", Component: CategoryForm, },
+          { path: "products", Component: ProductForm, }
+        ]
+      },
+    ],
+  }
 ]);
 
-
+// Render the application
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <ToastContainer />

@@ -119,7 +119,7 @@ const SignUp = () => {
 						<div className="flex gap-2 items-center mt-8 text-center justify-center">
 							<p>Already have account?</p>
 							<NavLink
-								to="/Login"
+								to="/login"
 								className="hover:border-b-1 hover:border-black font-medium"
 							>
 								Log in

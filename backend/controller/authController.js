@@ -28,7 +28,7 @@ const registrationController = async (req, res) => {
 
 	const isUserExist = await UserModel.findOne({ email });
 	if (isUserExist) {
-		return res.json({
+		return res.status(409).json({
 			success: false,
 			message: "User Already exist",
 		});
@@ -40,12 +40,12 @@ const registrationController = async (req, res) => {
 	const newUser = await UserModel.create({
 		name,
 		email,
-		password: hashPassword
+		password: hashPassword,
 	});
 
 	const token = jwt.sign(
 		{ id: newUser._id, email: newUser.email },
-		process.env.JWT_SECRET,
+		process.env.JWT_SECRET || "fallback-secret",
 		{ expiresIn: "1d" },
 	);
 
@@ -119,7 +119,7 @@ const loginController = async (req, res) => {
 
 	const token = jwt.sign(
 		{ id: isUserExist._id, email: isUserExist.email, role: isUserExist.role },
-		process.env.ACCESS_TOKEN,
+		process.env.ACCESS_TOKEN || process.env.JWT_SECRET || "fallback-secret",
 		{ expiresIn: "7d" },
 	);
 
@@ -150,7 +150,7 @@ const forgotPasswordController = async (req, res) => {
 	try {
 		const token = jwt.sign(
 			{ id: isUserExist._id, email: isUserExist.email, role: isUserExist.role },
-			process.env.ACCESS_TOKEN,
+			process.env.ACCESS_TOKEN || process.env.JWT_SECRET || "fallback-secret",
 			{ expiresIn: "10m" },
 		);
 
@@ -187,10 +187,21 @@ const setNewPasswordController = async (req, res) => {
 	}
 
 	try {
-		const decode = jwt.decode(token, process.env.AccessToken);
+		const decode = jwt.decode(token, process.env.ACCESS_TOKEN || process.env.JWT_SECRET || "fallback-secret");
 		console.log("DECODE", decode);
+		if (!decode || !decode.id) {
+			return res.status(401).json({
+				success: false,
+				message: "Invalid or expired token",
+			});
+		}
 		const user = await UserModel.findById(decode.id);
-		console.log(user);
+		if (!user) {
+			return res.status(404).json({
+				success: false,
+				message: "User not found",
+			});
+		}
 
 		// Generate hashpassword
 		const hashpassword = bcrypt.hashSync(newPassword, 10);

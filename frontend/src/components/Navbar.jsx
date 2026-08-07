@@ -9,12 +9,14 @@ import { IoCartOutline } from "react-icons/io5";
 import { CiSearch } from "react-icons/ci";
 import { AiOutlineBars } from "react-icons/ai";
 import { NavLink, useNavigate } from "react-router";
-import { useSelector } from 'react-redux';
-import { BiUser } from "react-icons/bi";
+import { useDispatch, useSelector } from 'react-redux';
+import { BiLogOut, BiUser } from "react-icons/bi";
+import { logout } from '../Slices/authSlice';
 
 
 const Navbar = () => {
   const user = useSelector((state) => state.auth?.user);
+  const dispatch = useDispatch();
   const [show, setShow] = useState(false);
   const [showUserDropdown, setShowUserDropdown] = useState(false);
   const handleClick = () => {
@@ -47,6 +49,12 @@ const Navbar = () => {
     } else {
       setFilteredProduct(products.filter((item) => item.title.toLowerCase().includes(value.toLowerCase())));
     }
+  }
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate('/login');
+    setShowUserDropdown(false);
   }
 
   return (
@@ -125,19 +133,25 @@ const Navbar = () => {
                     </div>
                   </NavLink>
 
-                  <div className='p-1 relative'>
-                    <button className="text-2xl cursor-pointer" onClick={() => setShowUserDropdown(!showUserDropdown)}>
-                      <BiUser />
-                    </button>
-                    {showUserDropdown && user && (
-                      <ul className='absolute top-9 right-0 p-2 bg-gray-100 text-black w-32 rounded-sm shadow-lg space-y-2 py-2'>
-                        <li>Profile</li>
-                        <li>Dashboard</li>
-                        <li>Settings</li>
-                        <li className="text-red-600 cursor-pointer">Logout</li>
-                      </ul>
-                    )}
-                  </div>
+                  {user && (
+                    <div className='p-1 relative'>
+                      <button className="text-2xl cursor-pointer" onClick={() => setShowUserDropdown(!showUserDropdown)}>
+                        <BiUser />
+                      </button>
+                      {showUserDropdown && user && (
+                        <ul className='absolute top-9 right-0 p-2 bg-gray-100 text-black w-32 rounded-sm shadow-lg space-y-2 py-2'>
+                          <li>Profile</li>
+                          <li>
+                            <NavLink to="/dashboard" onClick={() => setShowUserDropdown(false)} className="text-inherit">Dashboard</NavLink>
+                          </li>
+                          <li>Settings</li>
+                          <li>
+                            <button onClick={handleLogout} className="text-red-600 cursor-pointer">Logout</button>
+                          </li>
+                        </ul>
+                      )}
+                    </div>
+                  )}
                 </div>
 
               </div>
