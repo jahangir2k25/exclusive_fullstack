@@ -6,6 +6,8 @@ const dbConnect = require("./config/db.config");
 const authRoute = require("./routes/authRoute");
 const productRoute = require("./routes/productRoute");
 const cors = require("cors");
+const categoryRoute = require("./routes/categoryRoute");
+
 
 app.use(express.json());
 app.use(cors());
@@ -18,6 +20,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/v1", authRoute);
 app.use("/product", productRoute);
+app.use("/api/v1", categoryRoute);
 
 dbConnect();
 
