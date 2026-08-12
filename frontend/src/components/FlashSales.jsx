@@ -88,6 +88,7 @@ const FlashSales = () => {
                 <Slider {...settings} className='mt-10'>
                     <div>
                         <Card
+                            id='1'
                             img={Gamepad}
                             heading='HAVIT HV-G92 Gamepad'
                             price='$120'
@@ -98,6 +99,7 @@ const FlashSales = () => {
                     </div>
                     <div>
                         <Card
+                            id='2'
                             img={Keyboard}
                             heading='AK-900 Wired Keyboard'
                             price='$960'
@@ -108,6 +110,7 @@ const FlashSales = () => {
                     </div>
                     <div>
                         <Card
+                            id='3'
                             img={Monitor}
                             heading='IPS LCD Gaming Monitor'
                             price='$370'
@@ -118,6 +121,7 @@ const FlashSales = () => {
                     </div>
                     <div>
                         <Card
+                            id='4'
                             img={Chair}
                             heading='S-Series Comfort Chair '
                             price='$375'

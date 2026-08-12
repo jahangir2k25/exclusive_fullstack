@@ -19,8 +19,9 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/v1", authRoute);
-app.use("/product", productRoute);
+app.use("/api/v1", productRoute);
 app.use("/api/v1", categoryRoute);
+
 
 dbConnect();
 
