@@ -3,53 +3,51 @@ const { Schema, model } = require("mongoose");
 const productSchema = new Schema({
 	title: {
 		type: String,
-		required: true
+		required: true,
+		trim: true,
 	},
 	description: {
 		type: String,
-		required: true
+		required: true,
+		trim: true,
 	},
-	price: {
+	review: {
 		type: Number,
-		required: true
+		required: true,
+		min: 0,
+		max: 5,
 	},
 	category: {
-		type: string,
-		required: true
+		type: String,
+		trim: true,
+		required: true,
 	},
-	reviews: [
-		{
-			type: string,
-			ref: "Review",
-			trim: true
-		}
-	],
 	stock: {
 		type: Number,
 		required: true,
-		trim: true
 	},
-	colors: [
+	price: {
+		type: Number,
+		required: true,
+	},
+	colours: [
 		{
 			type: String,
-			trim: true
+			trim: true,
 		}
 	],
-	sizes: [
+	size: [
 		{
 			type: String,
-			trim: true
+			trim: true,
 		}
 	],
 	images: [
 		{
 			url: { type: String, required: true },
-			isMain: Boolean,
-			default: false
+			public_id: { type: String, required: false },
 		}
-	]
-}, { timestamps: true })
-
-// const User = Model("User", userSchema);
+	],
+}, { timestamps: true });
 
 module.exports = model("Product", productSchema);

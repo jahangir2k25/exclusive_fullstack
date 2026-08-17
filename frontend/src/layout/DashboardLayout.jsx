@@ -7,7 +7,7 @@ const DashboardLayout = () => {
             <header className="border-b border-slate-200 bg-white">
                 <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
                     <div>
-                        <p className="text-sm font-medium uppercase tracking-[0.25em] text-[#DB4444]">Admin Dashboard</p>
+                        <p className="text-sm font-medium uppercase tracking-[0.25em] text-[#DB4444]"><a href="/">Home</a></p>
                         <h1 className="mt-2 text-3xl font-semibold text-slate-900">Exclusive Control Panel</h1>
                     </div>
 
