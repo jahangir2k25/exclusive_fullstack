@@ -3,14 +3,14 @@ const secureMiddleware = require("../middleware/secureMiddleware");
 const {
     addProductController,
     getProductsController,
-    updateProductController,
+    editProductController,
     deleteProductController,
 } = require("../controller/productController");
 const router = Router();
 
 router.get("/product", getProductsController);
 router.post("/product/add", addProductController);
-router.put("/product/:productId", updateProductController);
-router.delete("/product/:productId", deleteProductController);
+router.put("/product/:id", editProductController);
+router.delete("/product/:id", deleteProductController);
 
 module.exports = router;
